@@ -16,7 +16,7 @@ import com.acn.developher.service.dao.AccountRepo;
 import com.acn.developher.service.domain.Account;
 
 @RestController
-@RequestMapping(path = "/develop-her/account")
+@RequestMapping(path = "/develop-her")
 @CrossOrigin
 public class AccountController {
 	
@@ -24,8 +24,8 @@ public class AccountController {
 	private AccountRepo accountRepo;
 	
 
-	@GetMapping(path="/all", produces = "application/json")
-	public ResponseEntity<List<Account>> getAllAccounts() {
+	@GetMapping(path="/account/all", produces = "application/json")
+	public List<Account> getAllAccounts() {
 
 		List<Account> accountList = new ArrayList<Account>();
 		Iterable<Account> accounts = accountRepo.findAll();
@@ -33,10 +33,10 @@ public class AccountController {
 			accountList.add(account);
 			
 		});
-		return ResponseEntity.ok(accountList);
+		return accountList;
 	}
 	
-	@PostMapping(path= "/add", consumes = "application/json", produces = "application/json")
+	@PostMapping(path= "/account/add", consumes = "application/json", produces = "application/json")
 	public ResponseEntity<Account> registerAccount(@RequestBody Account account) {
 
 		return ResponseEntity.ok(accountRepo.save(account));
